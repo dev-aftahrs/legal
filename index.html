@@ -627,6 +627,23 @@ window.onclick = function(event) {
 document.querySelectorAll('.toc-modal a').forEach(link => {
   link.addEventListener('click', closeTocModal);
 });
+    function showSection(section) {
+      const sections = ['privacy', 'terms', 'merchant'];
+      sections.forEach(sec => {
+        document.getElementById(`${sec}Section`).style.display = sec === section ? 'block' : 'none';
+        document.getElementById(`${sec}Btn`).classList.toggle('active', sec === section);
+      });
+      document.querySelector('.mobile-nav').style.display = 'none';
+    }
+
+    window.addEventListener('scroll', () => {
+      document.querySelector('header').classList.toggle('scrolled', window.scrollY > 10);
+    });
+    
+    function toggleNav() {
+      const nav = document.querySelector('.mobile-nav');
+      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+    }
   </script>
 </body>
 </html>
