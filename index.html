@@ -192,6 +192,105 @@
       main { padding: 1rem; }
       .toggle-switch button { min-width: 100px; padding: 0.5rem; }
     }
+
+    @media (max-width: 768px) {
+  /* Previous mobile styles */
+  
+  .toggle-switch {
+    display: none; /* Hide original toggle switch */
+  }
+  
+  .mobile-tabs {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 0 1rem 1rem 0;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    margin-left: -0.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-tabs:hover {
+    margin-left: 0;
+  }
+  
+  .mobile-tabs button {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding: 1rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    background: #fff;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-tabs button.active {
+    background: var(--accent-color);
+    color: white;
+    border-color: transparent;
+  }
+  
+  main {
+    margin-left: 2rem; /* Make space for sticky tabs */
+  }
+  
+  .content .text {
+    padding: 1rem;
+  }
+  
+  .toc-icon {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    background: var(--accent-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    cursor: pointer;
+  }
+  
+  .toc-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    display: none;
+    padding: 1rem;
+  }
+  
+  .toc-modal.active {
+    display: block;
+  }
+  
+  .toc-modal .toc {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
   </style>
 </head>
 <body>
@@ -201,7 +300,7 @@
      
     </div>
     <div class="legal-title">Legal Notices</div>
-    <div class="hamburger" onclick="toggleNav()">☰</div>
+
   </header>
   <div class="mobile-nav">
     <a href="#" onclick="showSection('privacy')">Privacy Policy</a>
@@ -216,7 +315,13 @@
     </div>
 <!-- Sticky TOC Icon for Mobile -->
 <div class="toc-icon-mobile" onclick="openTocModal()">☰</div>
+<div class="mobile-tabs">
+    <button class="active" onclick="showSection('privacy')">Privacy Policy</button>
+    <button onclick="showSection('terms')">Terms of Use</button>
+    <button onclick="showSection('merchant')">Merchant Terms</button>
+  </div>
 
+  <div class="toc-icon" onclick="toggleTocModal()">📖</div>
 <!-- TOC Modal -->
 <div id="tocModal" class="toc-modal">
   <div class="toc-modal-content">
