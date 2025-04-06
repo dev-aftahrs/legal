@@ -621,6 +621,21 @@
   modalBody.appendChild(tocContent);
   modal.style.display = 'block';
 }
+    function toggleTocModal() {
+  const modal = document.getElementById('tocModal');
+  const currentSection = document.querySelector('section[style="display: block;"]');
+  const tocContent = currentSection.querySelector('.toc').cloneNode(true);
+  
+  // Add click handlers to cloned TOC links
+  tocContent.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+  });
+
+  modal.querySelector('.toc').replaceWith(tocContent);
+  modal.classList.toggle('active');
+}
 
 function closeTocModal() {
   document.getElementById('tocModal').style.display = 'none';
