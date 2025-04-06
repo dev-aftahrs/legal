@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy & Terms - Aftahours Inc.</title>
   <link rel="icon" href="./icon_afta.svg" type="image/x-icon">
-  <style>
+   <style>
     :root {
       --primary-color: #000;
       --background-color: #fff;
@@ -21,14 +21,7 @@
       line-height: 1.6;
       font-size: 18px;
     }
-    .legal-title {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 30px;
-      font-weight: 800;
-    }
-    
+   
     header {
       position: sticky;
       top: 0;
@@ -40,6 +33,13 @@
       border-bottom: 1px solid #eee;
       z-index: 1000;
       transition: padding 0.3s ease;
+    }
+    .legal-title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: larger;
+      font-weight: 600;
     }
     header.scrolled { padding: 0.5rem 2rem; }
     .logo {
@@ -69,11 +69,38 @@
     .nav-links { display: flex; gap: 1.5rem; }
     .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 500; }
     .hamburger { display: none; font-size: 1.5rem; cursor: pointer; }
-    .mobile-nav { display: none; flex-direction: column; background: var(--background-color); padding: 1rem 2rem; }
+    .mobile-nav { 
+      display: none; 
+      flex-direction: column; 
+      background: var(--background-color); 
+      padding: 1rem 2rem; 
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      left: 0;
+      border-bottom: 1px solid #eee;
+    }
     .mobile-nav a { text-decoration: none; color: var(--text-color); padding: 0.5rem 0; }
     main { max-width: var(--max-width); margin: 0 auto; padding: 2rem; }
-    .toggle-switch { display: inline-flex; border: 1px solid var(--accent-color); border-radius: 9999px; overflow: hidden; margin-bottom: 2rem; }
-    .toggle-switch button { padding: 0.75rem 1.25rem; border: none; background: none; cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1rem; }
+    .toggle-switch { 
+      display: inline-flex; 
+      border: 1px solid var(--accent-color); 
+      border-radius: 9999px; 
+      overflow: hidden; 
+      margin-bottom: 2rem; 
+      flex-wrap: wrap;
+    }
+    .toggle-switch button { 
+      padding: 0.75rem 1.25rem; 
+      border: none; 
+      background: none; 
+      cursor: pointer; 
+      color: var(--accent-color); 
+      font-weight: 600; 
+      font-size: 1rem; 
+      flex: 1;
+      min-width: 120px;
+    }
     .toggle-switch button.active { background: var(--accent-color); color: #fff; }
     .heading-container { margin-bottom: 1.5rem; text-align: center; }
     .heading-container h1 { font-size: 3.5rem; margin-bottom: 0.5rem; }
@@ -93,7 +120,8 @@
     .text ul { margin-bottom: 1rem; padding-left: 1.5rem; }
     .text li { margin-bottom: 0.5rem; font-size: 1rem; }
     .text address { margin-top: 1rem; font-style: normal; font-size: 1rem; }
-   @media (max-width: 768px) {
+
+    @media (max-width: 768px) {
       .legal-title { display: none; }
       .nav-links { display: none; }
       .hamburger { display: block; }
@@ -331,21 +359,77 @@
         </aside>
       </div>
     </section>
+
+    <!-- Merchant Terms Section -->
+    <section id="merchantSection" style="display:none;">
+      <div class="heading-container">
+        <h1>Merchant Terms</h1>
+        <div class="updated">Effective Date: 1st April, 2025</div>
+      </div>
+      <div class="content">
+        <div class="text">
+          <h2 id="merchant-introduction">1. Merchant Agreement</h2>
+          <p>These Merchant Terms ("Terms") govern your use of Aftahours Inc.'s services as a merchant partner. By registering as a merchant, you agree to comply with these Terms and all applicable laws.</p>
+
+          <h2 id="responsibilities">2. Merchant Responsibilities</h2>
+          <ul>
+            <li>Accurate menu representation and pricing</li>
+            <li>Timely order fulfillment and quality control</li>
+            <li>Compliance with all food safety regulations</li>
+            <li>Maintenance of valid business licenses</li>
+          </ul>
+
+          <h2 id="commission">3. Commission Structure</h2>
+          <p>A 15% commission fee will be applied to all orders processed through our platform. Payments will be remitted weekly via ACH transfer.</p>
+
+          <h2 id="tax-compliance">4. Tax Compliance</h2>
+          <p>Merchants are solely responsible for:</p>
+          <ul>
+            <li>Calculating and collecting applicable sales taxes</li>
+            <li>Filing tax returns with appropriate authorities</li>
+            <li>Maintaining tax compliance records</li>
+          </ul>
+
+          <h2 id="termination">5. Termination</h2>
+          <p>Either party may terminate this agreement with 30 days written notice. Aftahours reserves the right to immediately suspend accounts for violations of these Terms.</p>
+
+          <address>
+            Aftahours Inc.<br>
+            173 Weeden Street, Pawtucket, Rhode Island, 02860<br>
+            Email: <a href="mailto:merchants@aftahrs.com">merchants@aftahrs.com</a>
+          </address>
+        </div>
+        <aside class="toc">
+          <h2>Table of Contents</h2>
+          <ol>
+            <li><a href="#merchant-introduction">Merchant Agreement</a></li>
+            <li><a href="#responsibilities">Merchant Responsibilities</a></li>
+            <li><a href="#commission">Commission Structure</a></li>
+            <li><a href="#tax-compliance">Tax Compliance</a></li>
+            <li><a href="#termination">Termination</a></li>
+          </ol>
+        </aside>
+      </div>
+    </section>
   </main>
 
   <script>
+    function showSection(section) {
+      const sections = ['privacy', 'terms', 'merchant'];
+      sections.forEach(sec => {
+        document.getElementById(`${sec}Section`).style.display = sec === section ? 'block' : 'none';
+        document.getElementById(`${sec}Btn`).classList.toggle('active', sec === section);
+      });
+      document.querySelector('.mobile-nav').style.display = 'none';
+    }
+
     window.addEventListener('scroll', () => {
       document.querySelector('header').classList.toggle('scrolled', window.scrollY > 10);
     });
+    
     function toggleNav() {
       const nav = document.querySelector('.mobile-nav');
       nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-    }
-    function showSection(section) {
-      document.getElementById('privacySection').style.display = section === 'privacy' ? 'block' : 'none';
-      document.getElementById('termsSection').style.display = section === 'terms' ? 'block' : 'none';
-      document.getElementById('privacyBtn').classList.toggle('active', section === 'privacy');
-      document.getElementById('termsBtn').classList.toggle('active', section === 'terms');
     }
   </script>
 </body>
