@@ -595,32 +595,6 @@
   </main>
 
   <script>
-    function showSection(section) {
-      const sections = ['privacy', 'terms', 'merchant'];
-      sections.forEach(sec => {
-        document.getElementById(`${sec}Section`).style.display = sec === section ? 'block' : 'none';
-        document.getElementById(`${sec}Btn`).classList.toggle('active', sec === section);
-      });
-      document.querySelector('.mobile-nav').style.display = 'none';
-    }
-
-    window.addEventListener('scroll', () => {
-      document.querySelector('header').classList.toggle('scrolled', window.scrollY > 10);
-    });
-    
-    function toggleNav() {
-      const nav = document.querySelector('.mobile-nav');
-      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-    }
-    function openTocModal() {
-  const modal = document.getElementById('tocModal');
-  const activeSection = document.querySelector('section[id$="Section"]:not([style*="display: none"])');
-  const tocContent = activeSection.querySelector('.toc').cloneNode(true);
-  const modalBody = document.querySelector('.toc-modal-body');
-  modalBody.innerHTML = '';
-  modalBody.appendChild(tocContent);
-  modal.style.display = 'block';
-}
     function toggleTocModal() {
   const modal = document.getElementById('tocModal');
   const currentSection = document.querySelector('section[style="display: block;"]');
@@ -628,13 +602,11 @@
   
   // Add click handlers to cloned TOC links
   tocContent.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      modal.classList.remove('active');
-    });
+    link.addEventListener('click', closeTocModal);
   });
 
   modal.querySelector('.toc').replaceWith(tocContent);
-  modal.classList.toggle('active');
+  modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
 }
 
 function closeTocModal() {
@@ -644,15 +616,20 @@ function closeTocModal() {
 // Close modal when clicking outside the content
 window.onclick = function(event) {
   const modal = document.getElementById('tocModal');
-  if (event.target == modal) {
+  if (event.target === modal) {
     closeTocModal();
   }
 }
 
-// Close modal after clicking a TOC link
-document.querySelectorAll('.toc-modal a').forEach(link => {
-  link.addEventListener('click', closeTocModal);
-});
+// Update showSection function to close modal
+function showSection(section) {
+  const sections = ['privacy', 'terms', 'merchant'];
+  sections.forEach(sec => {
+    document.getElementById(`${sec}Section`).style.display = sec === section ? 'block' : 'none';
+    document.getElementById(`${sec}Btn`).classList.toggle('active', sec === section);
+  });
+  closeTocModal(); // Add this line to close modal on section change
+}
   </script>
 </body>
 </html>
