@@ -603,6 +603,13 @@
   modalBody.appendChild(tocContent);
   modal.style.display = 'block';
 }
+    function toggleTocModal() {
+  const modal = document.getElementById('tocModal');
+  const currentSection = document.querySelector('section[style="display: block;"]');
+  const tocContent = currentSection.querySelector('.toc').cloneNode(true);
+  modal.querySelector('.toc').replaceWith(tocContent);
+  modal.classList.toggle('active');
+}
 
 function closeTocModal() {
   document.getElementById('tocModal').style.display = 'none';
