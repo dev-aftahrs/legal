@@ -291,6 +291,26 @@
     overflow-y: auto;
   }
 }
+    @media (min-width: 769px) {
+  .mobile-tabs,
+  .toc-icon-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Ensure desktop toggle switch is hidden */
+  .toggle-switch {
+    display: none !important;
+  }
+  
+  /* Update active state for mobile tabs */
+  .mobile-tabs button.active {
+    background: var(--accent-color) !important;
+    color: white !important;
+    border-color: transparent !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -634,6 +654,10 @@ document.querySelectorAll('.toc-modal a').forEach(link => {
         document.getElementById(`${sec}Btn`).classList.toggle('active', sec === section);
       });
       document.querySelector('.mobile-nav').style.display = 'none';
+      const mobileBtns = document.querySelectorAll(`.mobile-tabs button`);
+    mobileBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.onclick.toString().includes(`'${sec}'`) && sec === section);
+    });
     }
 
     window.addEventListener('scroll', () => {
@@ -644,6 +668,7 @@ document.querySelectorAll('.toc-modal a').forEach(link => {
       const nav = document.querySelector('.mobile-nav');
       nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
     }
+    
   </script>
 </body>
 </html>
