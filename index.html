@@ -680,10 +680,7 @@ window.onclick = function(event) {
   }
 }
 
-// Close modal after clicking a TOC link
-document.querySelectorAll('.toc-modal a').forEach(link => {
-  link.addEventListener('click', closeTocModal);
-});
+
     function showSection(section) {
   const sections = ['privacy', 'terms', 'merchant'];
   sections.forEach(sec => {
