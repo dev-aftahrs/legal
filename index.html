@@ -52,8 +52,85 @@
       width: 50px;
       transition: height 0.3s ease;
     }
-    .mobile-nav {
-      display: flex; 
+    /* Sticky TOC Icon */
+.toc-icon-mobile {
+  display: none; /* Hidden by default, shown on mobile */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--accent-color);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* TOC Modal */
+.toc-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 2000;
+}
+
+.toc-modal-content {
+  background: var(--background-color);
+  margin: 2rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.close-toc {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .toc-icon-mobile {
+    display: block;
+  }
+  .content .toc {
+    display: none;
+  }
+  .toc-modal-content {
+    margin: 1rem;
+    padding: 1rem;
+  }
+}
+    .logo span {
+      margin-left: 0.75rem;
+      font-weight: bold;
+      font-size: 1.5rem;
+      display: inline-block;
+      white-space: nowrap;
+      transition: opacity 0.3s ease, width 0.3s ease, margin 0.3s ease;
+      overflow: hidden;
+    }
+    header.scrolled .logo span {
+      opacity: 0;
+      width: 0;
+      margin-left: 0;
+    }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 500; }
+    .hamburger { display: none; font-size: 1.5rem; cursor: pointer; }
+    .mobile-nav { 
+      display: none; 
       flex-direction: column; 
       background: var(--background-color); 
       padding: 1rem 2rem; 
@@ -85,125 +162,403 @@
       min-width: 120px;
     }
     .toggle-switch button.active { background: var(--accent-color); color: #fff; }
+    .heading-container { margin-bottom: 1.5rem; text-align: center; }
+    .heading-container h1 { font-size: 3.5rem; margin-bottom: 0.5rem; }
+    .heading-container .updated { color: #666; font-size: 1rem; }
     .content { display: flex; gap: 2rem; }
     .content .text, .content .toc { background: #f9f9f9; padding: 1.5rem; border-radius: 0.5rem; }
     .content .text { flex: 2; }
     .content .toc { flex: 1; position: sticky; top: 1rem; height: fit-content; }
+    .toc h2 { margin-bottom: 1rem; font-size: 1.25rem; }
+    .toc ol { list-style: none; counter-reset: item; padding-left: 0; }
+    .toc li { margin-bottom: 0.5rem; }
+    .toc li::before { counter-increment: item; content: counter(item) ". "; color: var(--accent-color); }
+    .toc a { text-decoration: none; color: var(--text-color); }
+    .text p { margin-bottom: 1rem; font-size: 1rem; }
+    .text h2 { margin-top: 2rem; margin-bottom: 1rem; font-size: 1.5rem; }
+    .text h3 { margin-top: 1.5rem; margin-bottom: 0.75rem; font-size: 1.25rem; }
+    .text ul { margin-bottom: 1rem; padding-left: 1.5rem; }
+    .text li { margin-bottom: 0.5rem; font-size: 1rem; }
+    .text address { margin-top: 1rem; font-style: normal; font-size: 1rem; }
+
     @media (max-width: 768px) {
       .legal-title { display: none; }
       .nav-links { display: none; }
       .hamburger { display: block; }
       .content { flex-direction: column; }
       .content .toc { position: relative; top: auto; }
+      .heading-container h1 { font-size: 2.5rem; }
+      header { padding: 1rem; }
       main { padding: 1rem; }
+      .toggle-switch button { min-width: 100px; padding: 0.5rem; }
     }
+
+    @media (max-width: 768px) {
+  /* Previous mobile styles */
+  
+  .toggle-switch {
+    display: none; /* Hide original toggle switch */
+  }
+  
+  .mobile-tabs {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 0 1rem 1rem 0;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    margin-left: -0.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-tabs:hover {
+    margin-left: 0;
+  }
+  
+  .mobile-tabs button {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding: 1rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    background: #fff;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-tabs button.active {
+    background: var(--accent-color);
+    color: white;
+    border-color: transparent;
+  }
+  
+  main {
+    margin-left: 2rem; /* Make space for sticky tabs */
+  }
+  
+  .content .text {
+    padding: 1rem;
+  }
+  
+  .toc-icon {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    background: var(--accent-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    cursor: pointer;
+  }
+  
+  .toc-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    display: none;
+    padding: 1rem;
+  }
+  
+  .toc-modal.active {
+    display: block;
+  }
+  
+  .toc-modal .toc {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+    @media (min-width: 769px) {
+  .mobile-tabs,
+  .toc-icon-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Ensure desktop toggle switch is hidden */
+  .toggle-switch {
+    display: none !important;
+  }
+  
+  /* Update active state for mobile tabs */
+  .mobile-tabs button.active {
+    background: var(--accent-color) !important;
+    color: white !important;
+    border-color: transparent !important;
+  }
+}
   </style>
 </head>
 <body>
   <header>
     <div class="logo">
       <img src="./icon_afta.svg" alt="Aftahours Logo">
+     
     </div>
     <div class="legal-title">Legal Notices</div>
+
   </header>
-  
   <div class="mobile-nav">
     <a href="#" onclick="showSection('privacy')">Privacy Policy</a>
     <a href="#" onclick="showSection('terms')">Terms of Use</a>
     <a href="#" onclick="showSection('merchant')">Merchant Terms</a>
   </div>
-  
   <main>
     <div class="toggle-switch">
       <button id="privacyBtn" class="active" onclick="showSection('privacy')">Privacy Policy</button>
       <button id="termsBtn" onclick="showSection('terms')">Terms of Use</button>
       <button id="merchantBtn" onclick="showSection('merchant')">Merchant Terms</button>
     </div>
+<!-- Sticky TOC Icon for Mobile -->
+<div class="toc-icon-mobile" onclick="openTocModal()">☰</div>
+<div class="mobile-tabs">
+    <button class="active" onclick="showSection('privacy')">Privacy Policy</button>
+    <button onclick="showSection('terms')">Terms of Use</button>
+    <button onclick="showSection('merchant')">Merchant Terms</button>
+  </div>
 
+<!-- TOC Modal -->
+<div id="tocModal" class="toc-modal">
+  <div class="toc-modal-content">
+    <span class="close-toc" onclick="closeTocModal()">&times;</span>
+    <div class="toc-modal-body"></div>
+  </div>
+</div>
     <!-- Privacy Policy Section -->
     <section id="privacySection">
-      <div class="heading-container">
-        <h1>Privacy Policy</h1>
-        <div class="updated">Effective Date: 1st April, 2025</div>
-      </div>
-      <div class="content">
-        <div class="text">
-          <h2 id="introduction">1. Introduction</h2>
-          <p>Welcome to Aftahours Inc. (“Company”, “we”, “our”, or “us”). This Privacy Policy governs how we collect, use, disclose, and safeguard your information when you access our website and use our services (“Services”).</p>
-          <h2 id="information-collect">2. Information We Collect</h2>
-          <h3>2.1 Personal Data</h3>
-          <p>We may collect personally identifiable information (“Personal Data”) directly from you or from third parties as necessary to provide our Services. This includes, but is not limited to:</p>
-          <ul>
-            <li><strong>Identification Information:</strong> Name, date of birth, email address, telephone number, and mailing address.</li>
-            <li><strong>Financial Information:</strong> Payment details, billing address, credit card numbers, and transaction history.</li>
-            <li><strong>Account Information:</strong> Username, password, and profile information.</li>
-            <li><strong>Order Information:</strong> Details of your orders, preferences, and service feedback.</li>
-          </ul>
-          <h3>2.2 Non-Personal Data</h3>
-          <p>We also gather non-identifiable information automatically as you interact with our Services:</p>
-          <ul>
-            <li><strong>Technical Data:</strong> IP address, browser type, operating system, device identifiers, and geolocation data.</li>
-            <li><strong>Usage Data:</strong> Pages visited, links clicked, session duration, and navigation paths.</li>
-            <li><strong>Analytics Data:</strong> Aggregated data used to analyze trends and usage patterns.</li>
-          </ul>
-          <h3>2.3 Cookies and Tracking Technologies</h3>
-          <p>We use cookies, web beacons, and similar technologies to personalize your experience and collect data about your usage patterns. This information helps us optimize our website functionality and tailor content to your preferences.</p>
+        <div class="heading-container">
+          <h1>Privacy Policy</h1>
+          <div class="updated">Effective Date: 1st April, 2025</div>
         </div>
-        <aside class="toc">
-          <h2>Table of Contents</h2>
-          <ol>
-            <li><a href="#introduction">Introduction</a></li>
-            <li><a href="#information-collect">Information We Collect</a></li>
-            <li><a href="#use-information">Use of Your Information</a></li>
-            <li><a href="#sharing-disclosure">Sharing & Disclosure</a></li>
-            <li><a href="#data-security">Data Security</a></li>
-            <li><a href="#rights-choices">Your Rights & Choices</a></li>
-            <li><a href="#international-transfers">International Transfers</a></li>
-            <li><a href="#childrens-privacy">Children’s Privacy</a></li>
-            <li><a href="#data-retention">Data Retention</a></li>
-            <li><a href="#policy-updates">Policy Updates</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-          </ol>
-        </aside>
-      </div>
-    </section>
+        <div class="content">
+          <div class="text">
+            <h2 id="introduction">1. Introduction</h2>
+            <p>Welcome to Aftahours Inc. (“Company”, “we”, “our”, or “us”). This Privacy Policy governs how we collect, use, disclose, and safeguard your information when you access our website and use our services (“Services”). This document is designed to protect your privacy while ensuring compliance with applicable data protection laws, including Delaware statutes. By using our Services, you agree to the practices described herein. This policy applies to all users, including customers, partners, and visitors, and sets out our practices regarding data handling and security.</p>
+  
+            <h2 id="information-collect">2. Information We Collect</h2>
+            <h3>2.1 Personal Data</h3>
+            <p>We may collect personally identifiable information (“Personal Data”) directly from you or from third parties as necessary to provide our Services. This includes, but is not limited to:</p>
+            <ul>
+              <li><strong>Identification Information:</strong> Name, date of birth, email address, telephone number, and mailing address.</li>
+              <li><strong>Financial Information:</strong> Payment details, billing address, credit card numbers, and transaction history.</li>
+              <li><strong>Account Information:</strong> Username, password, and profile information.</li>
+              <li><strong>Order Information:</strong> Details of your orders, preferences, and service feedback.</li>
+            </ul>
+            <h3>2.2 Non-Personal Data</h3>
+            <p>We also gather non-identifiable information automatically as you interact with our Services:</p>
+            <ul>
+              <li><strong>Technical Data:</strong> IP address, browser type, operating system, device identifiers, and geolocation data.</li>
+              <li><strong>Usage Data:</strong> Pages visited, links clicked, session duration, and navigation paths.</li>
+              <li><strong>Analytics Data:</strong> Aggregated data used to analyze trends and usage patterns.</li>
+            </ul>
+            <h3>2.3 Cookies and Tracking Technologies</h3>
+            <p>We use cookies, web beacons, and similar technologies to personalize your experience and collect data about your usage patterns. This information helps us optimize our website functionality and tailor content to your preferences. Detailed cookie practices and opt-out mechanisms are explained in our Cookie Policy.</p>
+  
+            <h2 id="use-information">3. Use of Your Information</h2>
+            <p>We use the information we collect for multiple purposes, including:</p>
+            <ul>
+              <li>Provision and Improvement of Services: Processing transactions, maintaining your account, and enhancing our platform functionality.</li>
+              <li>Customer Support: Addressing inquiries, troubleshooting issues, and providing customer assistance.</li>
+              <li>Marketing and Communications: Sending newsletters, promotions, and updates, subject to your consent where applicable.</li>
+              <li>Legal and Regulatory Compliance: Meeting our legal obligations, responding to legal requests, and enforcing our policies.</li>
+              <li>Security and Fraud Prevention: Monitoring for unauthorized activity, protecting user data, and maintaining system integrity.</li>
+              <li>Business Analytics: Analyzing trends and user behavior to improve service offerings and user experience.</li>
+            </ul>
+  
+            <h2 id="sharing-disclosure">4. Sharing and Disclosure of Information</h2>
+            <h3>4.1 Third-Party Service Providers</h3>
+            <p>We may share your data with trusted third-party service providers who perform functions on our behalf, such as payment processing, data analytics, email delivery, and customer support. All such providers are contractually bound to adhere to strict confidentiality and security standards.</li>
+            <h3>4.2 Legal Obligations and Disclosures</h3>
+            <p>Your information may be disclosed when required by law, regulation, or legal process. We will also disclose information if we believe in good faith that such disclosure is necessary to protect our rights, the safety of users, or to comply with legal proceedings.</p>
+            <h3>4.3 Business Transfers</h3>
+            <p>In the event of a merger, acquisition, or sale of company assets, your information may be transferred to the new entity. We ensure that any successor entity is bound by similar privacy obligations.</p>
+            <h3>4.4 Publicly Available Information</h3>
+            <p>Any information you voluntarily post on public forums or social media may be visible to other users. We are not responsible for the privacy practices of third parties or external sites.</p>
+  
+            <h2 id="data-security">5. Data Security</h2>
+            <p>We employ robust security measures, including encryption, firewalls, and secure access protocols, to protect your data from unauthorized access, disclosure, alteration, or destruction. Regular audits and updates to our security practices help maintain data integrity. However, no system is completely secure, and we cannot guarantee absolute security.</p>
+  
+            <h2 id="rights-choices">6. Your Rights and Choices</h2>
+            <h3>6.1 Access and Correction</h3>
+            <p>You have the right to access, review, and update your Personal Data. If you notice any inaccuracies or wish to make changes, please contact us using the details provided in Section 11.</p>
+            <h3>6.2 Data Deletion and Portability</h3>
+            <p>Subject to legal obligations, you may request deletion or a copy of your data in a commonly used format. Please note that certain information may be retained as required by law or for legitimate business purposes.</p>
+            <h3>6.3 Consent and Withdrawal</h3>
+            <p>Where your data is processed based on consent, you have the right to withdraw consent at any time, which may affect your ability to use certain services.</p>
+            <h3>6.4 Rights Under Data Protection Laws</h3>
+            <p>Depending on your location, you may have additional rights under applicable data protection laws (such as GDPR or CCPA). Please contact us for guidance on how to exercise these rights.</p>
+  
+            <h2 id="international-transfers">7. International Data Transfers</h2>
+            <p>Your data may be stored and processed in countries outside your own. We take steps to ensure that your information receives an adequate level of protection consistent with this Privacy Policy, including the use of standard contractual clauses or other safeguards.</p>
+  
+            <h2 id="childrens-privacy">8. Children’s Privacy</h2>
+            <p>Our Services are intended for users who are at least 13 years old (or older if required by local law). We do not knowingly collect Personal Data from children without parental consent. If you believe that we have inadvertently collected such data, please contact us immediately for removal.</p>
+  
+            <h2 id="data-retention">9. Data Retention</h2>
+            <p>We retain your Personal Data only as long as necessary to fulfill the purposes outlined in this policy or as required by law. Data retention periods may vary based on the nature of the information and legal obligations.</p>
+  
+            <h2 id="policy-updates">10. Updates to this Privacy Policy</h2>
+            <p>We may update this Privacy Policy periodically. Any material changes will be communicated via our website and/or through direct notifications. The updated policy will include a revised effective date, and continued use of our Services will indicate your acceptance of the changes.</p>
+  
+            <h2 id="contact">11. Contact Us</h2>
+            <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us at:</p>
+            <address>
+              Aftahours Inc.<br>
+              173 Weeden Street, Pawtucket, Rhode Island, 02860<br>
+              Email: <a href="mailto:contact@aftahrs.com">contact@aftahrs.com</a><br>
+              Phone: +1 (857) 636-1575
+            </address>
+          </div>
+          <aside class="toc">
+            <h2>Table of Contents</h2>
+            <ol>
+              <li><a href="#introduction">Introduction</a></li>
+              <li><a href="#information-collect">Information We Collect</a></li>
+              <li><a href="#use-information">Use of Your Information</a></li>
+              <li><a href="#sharing-disclosure">Sharing & Disclosure</a></li>
+              <li><a href="#data-security">Data Security</a></li>
+              <li><a href="#rights-choices">Your Rights & Choices</a></li>
+              <li><a href="#international-transfers">International Transfers</a></li>
+              <li><a href="#childrens-privacy">Children’s Privacy</a></li>
+              <li><a href="#data-retention">Data Retention</a></li>
+              <li><a href="#policy-updates">Policy Updates</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+            </ol>
+          </aside>
+        </div>
+      </section>
 
     <!-- Terms of Use Section -->
     <section id="termsSection" style="display:none;">
-      <div class="heading-container">
-        <h1>Terms of Use</h1>
-        <div class="updated">Effective Date: 1st April, 2025</div>
-      </div>
-      <div class="content">
-        <div class="text">
-          <h2 id="acceptance">1. Acceptance of Terms</h2>
-          <p>By accessing or using the Aftahours Inc. website and its associated services (“Services”), you agree to be bound by these Terms of Use (“Terms”).</p>
-          <h2 id="eligibility">2. Eligibility</h2>
-          <p>You represent and warrant that you are at least 18 years of age and have the legal capacity to enter into these Terms.</p>
-          <h2 id="use-services">3. Use of Services</h2>
-          <p>You agree to use our Services only for lawful purposes and in accordance with these Terms.</p>
+        <div class="heading-container">
+          <h1>Terms of Use</h1>
+          <div class="updated">Effective Date: 1st April, 2025</div>
         </div>
-        <aside class="toc">
-          <h2>Table of Contents</h2>
-          <ol>
-            <li><a href="#acceptance">Acceptance of Terms</a></li>
-            <li><a href="#eligibility">Eligibility</a></li>
-            <li><a href="#use-services">Use of Services</a></li>
-            <li><a href="#intellectual-property">Intellectual Property Rights</a></li>
-            <li><a href="#user-content">User  Content</a></li>
-            <li><a href="#business-clauses">Specific Business Clauses</a></li>
-            <li><a href="#disclaimer">Disclaimer of Warranties</a></li>
-            <li><a href="#limitation-liability">Limitation of Liability</a></li>
-            <li><a href="#indemnification">Indemnification</a></li>
-            <li><a href="#governing-law">Governing Law & Dispute Resolution</a></li>
-            <li><a href="#modification-terms">Modification of Terms</a></li>
-            <li><a href="#severability">Severability</a></li>
-                        <li><a href="#entire-agreement">Entire Agreement</a></li>
-            <li><a href="#terms-contact">Contact Information</a></li>
-          </ol>
-        </aside>
-      </div>
-    </section>
+        <div class="content">
+          <div class="text">
+            <h2 id="acceptance">1. Acceptance of Terms</h2>
+            <p>By accessing or using the Aftahours Inc. website and its associated services (“Services”), you agree to be bound by these Terms of Use (“Terms”). These Terms constitute a legally binding agreement between you and Aftahours Inc. If you do not agree to these Terms, please discontinue using our Services immediately. Your continued use indicates your acceptance of any future modifications.</p>
+  
+            <h2 id="eligibility">2. Eligibility</h2>
+            <p>You represent and warrant that you are at least 18 years of age and have the legal capacity to enter into these Terms. If you are using our Services on behalf of an organization, you confirm that you have the authority to bind that organization to these Terms.</p>
+  
+            <h2 id="use-services">3. Use of Services</h2>
+            <p>You agree to use our Services only for lawful purposes and in accordance with these Terms. You are prohibited from:</p>
+            <ul>
+              <li>Engaging in any activity that violates local, state, federal, or international laws.</li>
+              <li>Interfering with or disrupting the integrity or performance of our Services.</li>
+              <li>Attempting to gain unauthorized access to our systems or any user accounts.</li>
+              <li>Uploading, transmitting, or distributing malicious code or harmful software.</li>
+              <li>Using our Services to harass, defame, or harm others.</li>
+            </ul>
+  
+            <h2 id="intellectual-property">4. Intellectual Property Rights</h2>
+            <p>All content on our website, including text, graphics, logos, images, audio clips, and software, is the property of Aftahours Inc. or its licensors and is protected by intellectual property laws. You are granted a limited, non-transferable license to use the content solely for personal, non-commercial purposes. Any unauthorized use, reproduction, or distribution of our content is strictly prohibited and may result in legal action.</p>
+  
+            <h2 id="user-content">5. User Content</h2>
+            <h3>5.1 Submission Guidelines</h3>
+            <p>Users may submit reviews, feedback, or other content (“User Content”) to our Services. By submitting User Content, you warrant that:</p>
+            <ul>
+              <li>You own the rights to the content or have obtained the necessary permissions.</li>
+              <li>The content does not violate any third-party rights or applicable laws.</li>
+              <li>The content is not defamatory, obscene, or harmful.</li>
+            </ul>
+            <h3>5.2 License to Use User Content</h3>
+            <p>You grant Aftahours Inc. a perpetual, irrevocable, worldwide, non-exclusive, royalty-free license to use, display, reproduce, distribute, and create derivative works from your User Content in connection with our Services.</p>
+            <h3>5.3 Moderation and Removal</h3>
+            <p>We reserve the right to remove or modify any User Content that violates these Terms or is deemed inappropriate in our sole discretion. We are not obligated to provide any notice prior to removal.</p>
+  
+            <h2 id="business-clauses">6. Specific Business Clauses</h2>
+            <h3>6.1 Responsibility for Sales Tax Filings</h3>
+            <p>Aftahours Inc. clearly states that all responsibility for the calculation, filing, and remittance of sales taxes rests solely with the Merchant/Restaurant using our platform. Our platform is provided as a service, and we do not assume any liability or obligation for sales tax compliance.</p>
+            <h3>6.2 No Refunds Policy</h3>
+            <p>Meals delivered in good condition are final sale and non-refundable. By placing an order, you acknowledge and agree that once the meal is delivered and confirmed to be in acceptable condition, no refunds will be provided. This policy is strictly enforced to ensure clarity and consistency in our service delivery.</p>
+  
+            <h2 id="disclaimer">7. Disclaimer of Warranties</h2>
+            <p>Our Services are provided on an “as is” and “as available” basis without any warranties of any kind, whether express or implied. Aftahours Inc. disclaims, to the fullest extent permitted by law, any warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not guarantee uninterrupted, secure, or error-free operation of our Services, and you acknowledge that any reliance on our Services is at your own risk.</p>
+  
+            <h2 id="limitation-liability">8. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law, Aftahours Inc. and its affiliates, directors, officers, employees, and agents shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenue, whether incurred directly or indirectly, arising from your use of or inability to use our Services. This limitation applies to all claims, including those based on contract, tort, or any other legal theory, even if we have been advised of the possibility of such damages.</p>
+  
+            <h2 id="indemnification">9. Indemnification</h2>
+            <p>You agree to indemnify, defend, and hold harmless Aftahours Inc. from and against any and all claims, liabilities, damages, losses, costs, and expenses (including reasonable attorneys’ fees) arising out of or in any way connected with:</p>
+            <ul>
+              <li>Your use or misuse of our Services.</li>
+              <li>Any violation of these Terms.</li>
+              <li>Any infringement of any intellectual property or other rights of any person or entity.</li>
+            </ul>
+  
+            <h2 id="governing-law">10. Governing Law and Dispute Resolution</h2>
+            <p>These Terms shall be governed by and construed in accordance with the laws of the State of Delaware, without regard to its conflict of laws principles. Any disputes arising under these Terms will be resolved as follows:</p>
+            <ul>
+              <li><strong>Good Faith Negotiations:</strong> Parties agree to attempt to resolve disputes amicably through direct negotiation.</li>
+              <li><strong>Binding Arbitration:</strong> If disputes cannot be resolved through negotiation, they shall be submitted to binding arbitration in Delaware in accordance with the rules of the American Arbitration Association. Judgment on the award rendered by the arbitrator may be entered in any court having jurisdiction.</li>
+              <li><strong>Exclusive Jurisdiction:</strong> For any legal actions not subject to arbitration, you agree that the state and federal courts located in Delaware shall have exclusive jurisdiction.</li>
+            </ul>
+  
+            <h2 id="modification-terms">11. Modification of Terms</h2>
+            <p>Aftahours Inc. reserves the right to change, modify, or update these Terms at any time without prior notice. Any such modifications will be posted on our website and become effective immediately upon posting. Your continued use of the Services following the posting of changes constitutes your acceptance of the revised Terms.</p>
+  
+            <h2 id="severability">12. Severability</h2>
+            <p>If any provision of these Terms is found to be invalid, unenforceable, or illegal under applicable law, that provision shall be enforced to the maximum extent possible, and the remaining provisions shall remain in full force and effect. The invalid or unenforceable provision shall be deemed modified to reflect the original intent of the parties as closely as possible.</p>
+  
+            <h2 id="entire-agreement">13. Entire Agreement</h2>
+            <p>These Terms, together with any policies or guidelines referenced herein, constitute the entire agreement between you and Aftahours Inc. regarding your use of the Services and supersede all prior understandings or agreements, whether written or oral, relating to the subject matter herein.</p>
+  
+            <h2 id="terms-contact">14. Contact Information</h2>
+            <p>If you have any questions, concerns, or require further clarification regarding these Terms, please contact us using the following methods:</p>
+            <address>
+              Aftahours Inc.<br>
+              173 Weeden Street, Pawtucket, Rhode Island, 02860<br>
+              Email: <a href="mailto:contact@aftahrs.com">contact@aftahrs.com</a><br>
+              Phone: +1 (857) 636-1575
+            </address>
+          </div>
+          <aside class="toc">
+            <h2>Table of Contents</h2>
+            <ol>
+              <li><a href="#acceptance">Acceptance of Terms</a></li>
+              <li><a href="#eligibility">Eligibility</a></li>
+              <li><a href="#use-services">Use of Services</a></li>
+              <li><a href="#intellectual-property">Intellectual Property Rights</a></li>
+              <li><a href="#user-content">User Content</a></li>
+              <li><a href="#business-clauses">Specific Business Clauses</a></li>
+              <li><a href="#disclaimer">Disclaimer of Warranties</a></li>
+              <li><a href="#limitation-liability">Limitation of Liability</a></li>
+              <li><a href="#indemnification">Indemnification</a></li>
+              <li><a href="#governing-law">Governing Law & Dispute Resolution</a></li>
+              <li><a href="#modification-terms">Modification of Terms</a></li>
+              <li><a href="#severability">Severability</a></li>
+              <li><a href="#entire-agreement">Entire Agreement</a></li>
+              <li><a href="#terms-contact">Contact Information</a></li>
+            </ol>
+          </aside>
+        </div>
+      </section>
 
     <!-- Merchant Terms Section -->
     <section id="merchantSection" style="display:none;">
@@ -215,6 +570,7 @@
         <div class="text">
           <h2 id="merchant-introduction">1. Merchant Agreement</h2>
           <p>These Merchant Terms ("Terms") govern your use of Aftahours Inc.'s services as a merchant partner. By registering as a merchant, you agree to comply with these Terms and all applicable laws.</p>
+
           <h2 id="responsibilities">2. Merchant Responsibilities</h2>
           <ul>
             <li>Accurate menu representation and pricing</li>
@@ -222,8 +578,10 @@
             <li>Compliance with all food safety regulations</li>
             <li>Maintenance of valid business licenses</li>
           </ul>
+
           <h2 id="commission">3. Commission Structure</h2>
           <p>A 15% commission fee will be applied to all orders processed through our platform. Payments will be remitted weekly via ACH transfer.</p>
+
           <h2 id="tax-compliance">4. Tax Compliance</h2>
           <p>Merchants are solely responsible for:</p>
           <ul>
@@ -231,8 +589,15 @@
             <li>Filing tax returns with appropriate authorities</li>
             <li>Maintaining tax compliance records</li>
           </ul>
+
           <h2 id="termination">5. Termination</h2>
           <p>Either party may terminate this agreement with 30 days written notice. Aftahours reserves the right to immediately suspend accounts for violations of these Terms.</p>
+
+          <address>
+            Aftahours Inc.<br>
+            173 Weeden Street, Pawtucket, Rhode Island, 02860<br>
+            Email: <a href="mailto:merchants@aftahrs.com">merchants@aftahrs.com</a>
+          </address>
         </div>
         <aside class="toc">
           <h2>Table of Contents</h2>
@@ -249,6 +614,39 @@
   </main>
 
   <script>
+   function openTocModal() {
+  const modal = document.getElementById('tocModal');
+  const activeSection = document.querySelector('section[id$="Section"]:not([style*="display: none"])');
+  const tocContent = activeSection.querySelector('.toc').cloneNode(true);
+  const modalBody = document.querySelector('.toc-modal-body');
+  modalBody.innerHTML = '';
+  modalBody.appendChild(tocContent);
+  modal.style.display = 'block';
+}
+    function toggleTocModal() {
+  const modal = document.getElementById('tocModal');
+  const currentSection = document.querySelector('section[style="display: block;"]');
+  const tocContent = currentSection.querySelector('.toc').cloneNode(true);
+  modal.querySelector('.toc').replaceWith(tocContent);
+  modal.classList.toggle('active');
+}
+
+function closeTocModal() {
+  document.getElementById('tocModal').style.display = 'none';
+}
+
+// Close modal when clicking outside the content
+window.onclick = function(event) {
+  const modal = document.getElementById('tocModal');
+  if (event.target == modal) {
+    closeTocModal();
+  }
+}
+
+// Close modal after clicking a TOC link
+document.querySelectorAll('.toc-modal a').forEach(link => {
+  link.addEventListener('click', closeTocModal);
+});
     function showSection(section) {
       const sections = ['privacy', 'terms', 'merchant'];
       sections.forEach(sec => {
@@ -256,11 +654,21 @@
         document.getElementById(`${sec}Btn`).classList.toggle('active', sec === section);
       });
       document.querySelector('.mobile-nav').style.display = 'none';
+      const mobileBtns = document.querySelectorAll(`.mobile-tabs button`);
+    mobileBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.onclick.toString().includes(`'${sec}'`) && sec === section);
+    });
     }
 
     window.addEventListener('scroll', () => {
       document.querySelector('header').classList.toggle('scrolled', window.scrollY > 10);
     });
+    
+    function toggleNav() {
+      const nav = document.querySelector('.mobile-nav');
+      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+    }
+    
   </script>
 </body>
 </html>
