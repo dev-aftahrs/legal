@@ -648,17 +648,22 @@ document.querySelectorAll('.toc-modal a').forEach(link => {
   link.addEventListener('click', closeTocModal);
 });
     function showSection(section) {
-      const sections = ['privacy', 'terms', 'merchant'];
-      sections.forEach(sec => {
-        document.getElementById(`${sec}Section`).style.display = sec === section ? 'block' : 'none';
-        document.getElementById(`${sec}Btn`).classList.toggle('active', sec === section);
-      });
-      document.querySelector('.mobile-nav').style.display = 'none';
-      const mobileBtns = document.querySelectorAll(`.mobile-tabs button`);
-    mobileBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.onclick.toString().includes(`'${sec}'`) && sec === section);
-    });
-    }
+  const sections = ['privacy', 'terms', 'merchant'];
+  sections.forEach(sec => {
+    document.getElementById(`${sec}Section`).style.display = sec === section ? 'block' : 'none';
+    document.getElementById(`${sec}Btn`).classList.toggle('active', sec === section);
+  });
+  
+  // Hide the mobile navigation
+  document.querySelector('.mobile-nav').style.display = 'none';
+
+  // Update the mobile tabs
+  const mobileBtns = document.querySelectorAll('.mobile-tabs button');
+  mobileBtns.forEach(btn => {
+    const btnSection = btn.onclick.toString().match(/'([^']+)'/)[1]; // Extract the section name from the onclick function
+    btn.classList.toggle('active', btnSection === section);
+  });
+}
 
     window.addEventListener('scroll', () => {
       document.querySelector('header').classList.toggle('scrolled', window.scrollY > 10);
