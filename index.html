@@ -657,19 +657,7 @@ function closeTocModal() {
   document.getElementById('tocModal').style.display = 'none';
 }
 
-    // Modified TOC link handling
-   document.querySelectorAll('.toc-modal a').forEach(link => {
-     link.addEventListener('click', function(e) {
-       e.preventDefault();
-       closeTocModal();
-       const targetId = this.getAttribute('href');
-       const targetElement = document.querySelector(targetId);
-       if (targetElement) {
-         targetElement.scrollIntoView({ 
-           behavior: 'smooth',
-           block: 'start'
-         });
-       }
+   
     
    
 // Close modal when clicking outside the content
