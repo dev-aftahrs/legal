@@ -41,6 +41,72 @@
       font-size: larger;
       font-weight: 800;
     }
+    .site-footer {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 2rem 0;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section a {
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.footer-section a:hover {
+  opacity: 1;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+  
+  .footer-section {
+    text-align: center;
+  }
+  
+  .footer-section ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
     header.scrolled { padding: 0.5rem 2rem; }
     .logo {
       display: flex;
@@ -633,6 +699,36 @@
         </aside>
       </div>
     </section>
+    <!-- Add this right before the closing </body> tag -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Aftahours Inc.</h3>
+      <p>Delivering quality meals with convenience.</p>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#" onclick="showSection('privacy')">Privacy Policy</a></li>
+        <li><a href="#" onclick="showSection('terms')">Terms of Use</a></li>
+        <li><a href="#" onclick="showSection('merchant')">Merchant Terms</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <p>173 Weeden Street<br>
+      Pawtucket, RI 02860<br>
+      Phone: +1 (857) 636-1575<br>
+      Email: <a href="mailto:contact@aftahrs.com">contact@aftahrs.com</a></p>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 Aftahours Inc. All rights reserved.</p>
+  </div>
+</footer>
   </main>
 
   <script>
