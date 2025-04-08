@@ -42,64 +42,52 @@
       font-weight: 800;
     }
     /* Add these styles */
-.site-footer {
+.mobile-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background: var(--primary-color);
-  color: #fff;
-  padding: 2rem 1rem;
-  margin-top: auto;
+  color: white;
+  padding: 0.8rem 1rem;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
 
-.footer-mobile {
+.footer-container {
   max-width: var(--max-width);
   margin: 0 auto;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.footer-logo img {
-  margin-bottom: 1.5rem;
+.copyright {
+  font-size: 0.75rem;
+  opacity: 0.9;
 }
 
 .footer-links {
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 1.2rem;
 }
 
 .footer-links a {
-  color: #fff;
+  color: white;
   text-decoration: none;
+  font-size: 0.75rem;
   font-weight: 500;
-  font-size: 0.9rem;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
 }
 
-.footer-contact {
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.footer-contact p {
-  margin: 0;
-}
-
-.footer-bottom {
-  font-size: 0.8rem;
-  opacity: 0.8;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
+.footer-links a:hover {
+  opacity: 1;
 }
 
 @media (min-width: 769px) {
-  .site-footer {
-    display: none; /* Hide mobile footer on desktop */
-  }
-}
-
-/* Add this to your existing desktop footer media query */
-@media (max-width: 768px) {
-  .site-footer.desktop-footer {
-    display: none; /* Hide desktop footer on mobile */
+  .mobile-footer {
+    display: none;
   }
 }
     header.scrolled { padding: 0.5rem 2rem; }
@@ -695,26 +683,13 @@
       </div>
     </section>
     <!-- Add this right before the closing </body> tag -->
-<footer class="site-footer">
-  <div class="footer-mobile">
-    <div class="footer-logo">
-      <img src="./icon_afta.svg" alt="Aftahours logo" width="40">
-    </div>
-    
+<footer class="mobile-footer">
+  <div class="footer-container">
+    <span class="copyright">&copy; 2025 Aftahours Inc.</span>
     <div class="footer-links">
       <a href="#" onclick="showSection('privacy')">Privacy</a>
       <a href="#" onclick="showSection('terms')">Terms</a>
       <a href="#" onclick="showSection('merchant')">Merchant</a>
-    </div>
-    
-    <div class="footer-contact">
-      <p>📞 +1 (857) 636-1575<br>
-      📧 contact@aftahrs.com</p>
-    </div>
-    
-    <div class="footer-bottom">
-      <p>© 2025 Aftahours Inc.<br>
-      173 Weeden St, Pawtucket, RI</p>
     </div>
   </div>
 </footer>
