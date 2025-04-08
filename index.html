@@ -41,70 +41,65 @@
       font-size: larger;
       font-weight: 800;
     }
-    .site-footer {
+    /* Add these styles */
+.site-footer {
   background: var(--primary-color);
   color: #fff;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
   margin-top: auto;
 }
 
-.footer-content {
+.footer-mobile {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 2rem;
+  text-align: center;
+}
+
+.footer-logo img {
+  margin-bottom: 1.5rem;
+}
+
+.footer-links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.footer-section {
-  flex: 1;
-  min-width: 250px;
-}
-
-.footer-section h3,
-.footer-section h4 {
-  color: #fff;
-  margin-bottom: 1rem;
-}
-
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section a {
+.footer-links a {
   color: #fff;
   text-decoration: none;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
-.footer-section a:hover {
-  opacity: 1;
+.footer-contact {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.footer-contact p {
+  margin: 0;
 }
 
 .footer-bottom {
-  text-align: center;
-  padding: 1rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+  padding-top: 1.5rem;
   border-top: 1px solid rgba(255,255,255,0.1);
-  margin-top: 2rem;
 }
 
+@media (min-width: 769px) {
+  .site-footer {
+    display: none; /* Hide mobile footer on desktop */
+  }
+}
+
+/* Add this to your existing desktop footer media query */
 @media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    padding: 0 1rem;
-  }
-  
-  .footer-section {
-    text-align: center;
-  }
-  
-  .footer-section ul {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  .site-footer.desktop-footer {
+    display: none; /* Hide desktop footer on mobile */
   }
 }
     header.scrolled { padding: 0.5rem 2rem; }
@@ -701,32 +696,26 @@
     </section>
     <!-- Add this right before the closing </body> tag -->
 <footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-section">
-      <h3>Aftahours Inc.</h3>
-      <p>Delivering quality meals with convenience.</p>
+  <div class="footer-mobile">
+    <div class="footer-logo">
+      <img src="./icon_afta.svg" alt="Aftahours logo" width="40">
     </div>
     
-    <div class="footer-section">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="#" onclick="showSection('privacy')">Privacy Policy</a></li>
-        <li><a href="#" onclick="showSection('terms')">Terms of Use</a></li>
-        <li><a href="#" onclick="showSection('merchant')">Merchant Terms</a></li>
-      </ul>
+    <div class="footer-links">
+      <a href="#" onclick="showSection('privacy')">Privacy</a>
+      <a href="#" onclick="showSection('terms')">Terms</a>
+      <a href="#" onclick="showSection('merchant')">Merchant</a>
     </div>
     
-    <div class="footer-section">
-      <h4>Contact Us</h4>
-      <p>173 Weeden Street<br>
-      Pawtucket, RI 02860<br>
-      Phone: +1 (857) 636-1575<br>
-      Email: <a href="mailto:contact@aftahrs.com">contact@aftahrs.com</a></p>
+    <div class="footer-contact">
+      <p>📞 +1 (857) 636-1575<br>
+      📧 contact@aftahrs.com</p>
     </div>
-  </div>
-  
-  <div class="footer-bottom">
-    <p>&copy; 2025 Aftahours Inc. All rights reserved.</p>
+    
+    <div class="footer-bottom">
+      <p>© 2025 Aftahours Inc.<br>
+      173 Weeden St, Pawtucket, RI</p>
+    </div>
   </div>
 </footer>
   </main>
