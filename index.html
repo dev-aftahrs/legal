@@ -326,6 +326,34 @@
       .content .text {
         padding: 1rem;
       }
+      .legal-toc {
+  counter-reset: section;
+  list-style: none;
+  padding-left: 1em;
+}
+
+.legal-toc > li {
+  counter-increment: section;
+  margin: 0.5rem 0;
+}
+
+.legal-toc > li > a:before {
+  content: counters(section, ".") " ";
+  font-weight: bold;
+}
+
+.legal-toc ol {
+  counter-reset: subsection;
+  padding-left: 1.5em;
+}
+
+.legal-toc ol > li {
+  counter-increment: subsection;
+}
+
+.legal-toc ol > li > a:before {
+  content: counters(section, ".") "." counters(subsection, ".") " ";
+}
       .toc-icon {
         position: fixed;
         right: 1rem;
@@ -640,28 +668,31 @@
   </div>
   <div class="content">
     <div class="text">
-      <h2 id="introduction">1. Introduction</h2>
+      <!-- Section 1 -->
+      <h2 id="1-introduction">1. Introduction</h2>
       <p>This Merchant Terms of Use Agreement (“Agreement”) is entered into between Aftahours Inc. (“Company,” “we,” “our”) and the merchant partner (“Merchant,” “you”) and governs the use of our platform for facilitating food orders and related services. By accessing or using our services as a Merchant, you agree to comply with and be bound by the terms and conditions set forth in this Agreement. This Agreement is designed to protect both Aftahours Inc. and its Merchant partners and to ensure smooth, compliant, and high-quality operations.</p>
 
-      <h2 id="definitions">2. Definitions</h2>
+      <!-- Section 2 -->
+      <h2 id="2-definitions">2. Definitions</h2>
       <ul>
         <li><strong>Services:</strong> All functions, tools, and platforms provided by Aftahours Inc. to facilitate orders, payments, and communications between the Company and Merchant.</li>
         <li><strong>Merchant:</strong> Any restaurant, food service provider, or other entity registered with Aftahours Inc. to offer food products through our platform.</li>
         <li><strong>Customer:</strong> Any end user or consumer who places an order for food or related services through our platform.</li>
         <li><strong>Order:</strong> A confirmed customer request for food delivery or pickup, as facilitated by our Services.</li>
-        <strong>State Sales Tax:</strong> Taxes imposed by state authorities on the sale of goods or services.</li>
+        <li><strong>State Sales Tax:</strong> Taxes imposed by state authorities on the sale of goods or services.</li>
       </ul>
 
-      <h2 id="merchant-responsibilities">3. Merchant Responsibilities</h2>
+      <!-- Section 3 -->
+      <h2 id="3-merchant-responsibilities">3. Merchant Responsibilities</h2>
       
-      <h3 id="sales-tax">3.1 State Sales Tax Filing</h3>
+      <h3 id="3-1-sales-tax">3.1 State Sales Tax Filing</h3>
       <ul>
         <li><strong>Merchant Responsibility:</strong> The Merchant is solely responsible for the accurate calculation, timely filing, and remittance of all applicable state and local sales taxes.</li>
         <li><strong>Documentation:</strong> Merchants must maintain appropriate documentation and records evidencing tax calculations and filings. Such documentation must be made available for audit upon request.</li>
         <li><strong>Compliance:</strong> Failure to comply with state tax obligations may result in penalties, and the Merchant shall indemnify and hold Aftahours Inc. harmless from any tax-related claims or liabilities.</li>
       </ul>
 
-      <h3 id="order-fulfillment">3.2 Order Fulfillment Responsibilities</h3>
+      <h3 id="3-2-order-fulfillment">3.2 Order Fulfillment Responsibilities</h3>
       <ul>
         <li><strong>Obligation to Fulfill Orders:</strong> Once a customer order has been approved via our platform, the Merchant is obligated to fulfill the order within the specified time frames.</li>
         <li><strong>Timelines and Deadlines:</strong> Orders must be prepared and dispatched promptly in accordance with the delivery or pickup times indicated during order placement. Late fulfillment may be subject to penalties, including temporary suspension from the platform.</li>
@@ -669,23 +700,24 @@
         <li><strong>Issue Resolution:</strong> In the event of an order-related dispute or issue (e.g., incorrect items, delays, or quality concerns), the Merchant must promptly address and resolve the matter in coordination with Aftahours Inc.’s customer service team.</li>
       </ul>
 
-      <h3 id="food-quality">3.3 Food Quality and Standards</h3>
+      <h3 id="3-3-food-quality">3.3 Food Quality and Standards</h3>
       <ul>
         <li><strong>Quality Assurance:</strong> Merchants shall adhere to the highest standards of food safety, preparation, handling, and delivery. All food products must meet or exceed industry standards as well as any applicable health and safety regulations.</li>
         <li><strong>Periodic Audits:</strong> Aftahours Inc. reserves the right to conduct periodic quality audits and inspections. Merchants must cooperate fully and address any deficiencies noted during these audits.</li>
         <li><strong>Consequences for Non-Compliance:</strong> Failure to maintain the required quality standards may result in penalties, suspension, or termination of the Merchant’s account. Repeat violations will lead to immediate disqualification from the platform.</li>
       </ul>
 
-      <h2 id="critical-clauses">4. Additional Critical Clauses</h2>
+      <!-- Section 4 -->
+      <h2 id="4-critical-clauses">4. Additional Critical Clauses</h2>
       
-      <h3 id="dispute-resolution">4.1 Dispute Resolution</h3>
+      <h3 id="4-1-dispute-resolution">4.1 Dispute Resolution</h3>
       <ul>
         <li><strong>Negotiation and Mediation:</strong> In the event of any dispute arising from this Agreement, both parties agree to first attempt to resolve the dispute amicably through direct negotiation.</li>
         <li><strong>Binding Arbitration:</strong> If disputes remain unresolved after negotiation, they shall be submitted to binding arbitration in accordance with the rules of the American Arbitration Association. The arbitration shall take place in the jurisdiction of Delaware, and the arbitrator’s decision shall be final and binding.</li>
         <li><strong>Court Jurisdiction:</strong> For disputes not subject to arbitration, the state and federal courts located in Delaware shall have exclusive jurisdiction.</li>
       </ul>
 
-      <h3 id="indemnification">4.2 Indemnification</h3>
+      <h3 id="4-2-indemnification">4.2 Indemnification</h3>
       <p><strong>Merchant Indemnity:</strong> The Merchant agrees to indemnify, defend, and hold harmless Aftahours Inc. and its affiliates, officers, directors, and employees from and against any claims, damages, losses, liabilities, and expenses (including reasonable attorneys’ fees) arising out of or in connection with:</p>
       <ul>
         <li>Non-compliance with any applicable laws or regulations</li>
@@ -693,52 +725,54 @@
         <li>Any breach or alleged breach of this Agreement</li>
       </ul>
 
-      <h3 id="compliance">4.3 Compliance with Local Laws and Regulations</h3>
+      <h3 id="4-3-compliance">4.3 Compliance with Local Laws and Regulations</h3>
       <ul>
         <li><strong>Legal Compliance:</strong> The Merchant must comply with all applicable local, state, and federal laws, regulations, and ordinances in the conduct of its business and the provision of services via the Aftahours Inc. platform.</li>
         <li><strong>Health and Safety:</strong> This includes, but is not limited to, compliance with food safety regulations, labor laws, and any licensing requirements.</li>
         <li><strong>Documentation:</strong> Merchants must obtain and maintain all necessary permits, licenses, and certifications required for the operation of their business.</li>
       </ul>
 
-      <h3 id="data-protection">4.4 Data Protection and Confidentiality</h3>
+      <h3 id="4-4-data-protection">4.4 Data Protection and Confidentiality</h3>
       <ul>
         <li><strong>Data Handling:</strong> The Merchant agrees to handle all customer data, order information, and any other sensitive information in accordance with applicable data protection laws and Aftahours Inc.’s privacy policies.</li>
         <li><strong>Confidentiality:</strong> The Merchant shall not disclose any confidential information pertaining to Aftahours Inc.’s operations, customer data, or proprietary methods without explicit written consent.</li>
         <li><strong>Data Security:</strong> Adequate measures must be taken to safeguard electronic data from unauthorized access, loss, or theft.</li>
       </ul>
 
-      <h2 id="structure">5. Overall Structure and Legal Robustness</h2>
+      <!-- Section 5 -->
+      <h2 id="5-structure">5. Overall Structure and Legal Robustness</h2>
       
-      <h3 id="headings">5.1 Clear Headings and Sections</h3>
+      <h3 id="5-1-headings">5.1 Clear Headings and Sections</h3>
       <p>This Agreement is organized into clear, numbered sections and subsections for ease of reference. Each section addresses a specific aspect of the Merchant relationship and operational requirements.</p>
 
-      <h3 id="explicit-terms">5.2 Detailed and Explicit Terms</h3>
+      <h3 id="5-2-terms">5.2 Detailed and Explicit Terms</h3>
       <p>All terms in this Agreement are detailed and explicit to prevent any ambiguity or potential loopholes. The language used is intended to be legally binding and enforceable.</p>
 
-      <h3 id="amendments">5.3 Amendments and Updates</h3>
+      <h3 id="5-3-amendments">5.3 Amendments and Updates</h3>
       <ul>
         <li><strong>Modification of Terms:</strong> Aftahours Inc. reserves the right to modify or update this Agreement at any time. Any changes will be communicated to the Merchant and will be effective upon posting on the Aftahours Inc. platform.</li>
         <li><strong>Notification:</strong> The Merchant is responsible for reviewing this Agreement periodically to stay informed of any modifications.</li>
       </ul>
 
-      <h3 id="termination">5.4 Termination</h3>
+      <h3 id="5-4-termination">5.4 Termination</h3>
       <ul>
         <li><strong>Breach of Agreement:</strong> Aftahours Inc. may terminate the Merchant’s access to the platform if any term of this Agreement is breached.</li>
         <li><strong>Notice of Termination:</strong> In the event of termination, the Merchant will be notified in writing, and any outstanding obligations will survive termination as necessary.</li>
       </ul>
 
-      <h2 id="miscellaneous">6. Miscellaneous</h2>
+      <!-- Section 6 -->
+      <h2 id="6-misc">6. Miscellaneous</h2>
       
-      <h3 id="entire-agreement">6.1 Entire Agreement</h3>
+      <h3 id="6-1-entire">6.1 Entire Agreement</h3>
       <p>This Agreement, including all schedules and attachments referenced herein, constitutes the entire agreement between the parties regarding the subject matter herein and supersedes all prior or contemporaneous understandings or agreements, whether written or oral.</p>
 
-      <h3 id="severability">6.2 Severability</h3>
+      <h3 id="6-2-severability">6.2 Severability</h3>
       <p>If any provision of this Agreement is found to be invalid or unenforceable by a court of competent jurisdiction, such provision shall be enforced to the maximum extent permitted by law, and the remaining provisions shall remain in full force and effect.</p>
 
-      <h3 id="governing-law">6.3 Governing Law</h3>
+      <h3 id="6-3-law">6.3 Governing Law</h3>
       <p>This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware without regard to its conflict of law principles.</p>
 
-      <h3 id="contact">6.4 Contact Information</h3>
+      <h3 id="6-4-contact">6.4 Contact Information</h3>
       <address>
         For any questions, concerns, or disputes regarding this Agreement, please contact:<br><br>
         Aftahours Inc.<br>
@@ -747,6 +781,7 @@
         Phone: +1 (857) 636-1575
       </address>
 
+      <!-- Disclaimer -->
       <div class="disclaimer">
         <h3>Disclaimer:</h3>
         <p>This Merchant Terms of Use Agreement is intended for informational purposes only and does not constitute legal advice. Aftahours Inc. strongly recommends that you consult with a qualified attorney to ensure that this Agreement fully meets all legal requirements and is customized to your specific business needs.</p>
@@ -754,40 +789,41 @@
       </div>
     </div>
 
+    <!-- Table of Contents -->
     <aside class="toc">
       <h2>Table of Contents</h2>
-      <ol>
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#definitions">Definitions</a></li>
-        <li><a href="#merchant-responsibilities">Merchant Responsibilities</a>
+      <ol class="legal-toc">
+        <li><a href="#1-introduction">1. Introduction</a></li>
+        <li><a href="#2-definitions">2. Definitions</a></li>
+        <li><a href="#3-merchant-responsibilities">3. Merchant Responsibilities</a>
           <ol>
-            <li><a href="#sales-tax">State Sales Tax</a></li>
-            <li><a href="#order-fulfillment">Order Fulfillment</a></li>
-            <li><a href="#food-quality">Food Quality</a></li>
+            <li><a href="#3-1-sales-tax">3.1 State Sales Tax</a></li>
+            <li><a href="#3-2-order-fulfillment">3.2 Order Fulfillment</a></li>
+            <li><a href="#3-3-food-quality">3.3 Food Quality</a></li>
           </ol>
         </li>
-        <li><a href="#critical-clauses">Additional Critical Clauses</a>
+        <li><a href="#4-critical-clauses">4. Additional Critical Clauses</a>
           <ol>
-            <li><a href="#dispute-resolution">Dispute Resolution</a></li>
-            <li><a href="#indemnification">Indemnification</a></li>
-            <li><a href="#compliance">Legal Compliance</a></li>
-            <li><a href="#data-protection">Data Protection</a></li>
+            <li><a href="#4-1-dispute-resolution">4.1 Dispute Resolution</a></li>
+            <li><a href="#4-2-indemnification">4.2 Indemnification</a></li>
+            <li><a href="#4-3-compliance">4.3 Compliance</a></li>
+            <li><a href="#4-4-data-protection">4.4 Data Protection</a></li>
           </ol>
         </li>
-        <li><a href="#structure">Agreement Structure</a>
+        <li><a href="#5-structure">5. Agreement Structure</a>
           <ol>
-            <li><a href="#headings">Headings</a></li>
-            <li><a href="#explicit-terms">Explicit Terms</a></li>
-            <li><a href="#amendments">Amendments</a></li>
-            <li><a href="#termination">Termination</a></li>
+            <li><a href="#5-1-headings">5.1 Headings</a></li>
+            <li><a href="#5-2-terms">5.2 Explicit Terms</a></li>
+            <li><a href="#5-3-amendments">5.3 Amendments</a></li>
+            <li><a href="#5-4-termination">5.4 Termination</a></li>
           </ol>
         </li>
-        <li><a href="#miscellaneous">Miscellaneous</a>
+        <li><a href="#6-misc">6. Miscellaneous</a>
           <ol>
-            <li><a href="#entire-agreement">Entire Agreement</a></li>
-            <li><a href="#severability">Severability</a></li>
-            <li><a href="#governing-law">Governing Law</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#6-1-entire">6.1 Entire Agreement</a></li>
+            <li><a href="#6-2-severability">6.2 Severability</a></li>
+            <li><a href="#6-3-law">6.3 Governing Law</a></li>
+            <li><a href="#6-4-contact">6.4 Contact</a></li>
           </ol>
         </li>
       </ol>
