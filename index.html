@@ -278,7 +278,54 @@
       overflow: hidden;
       margin-bottom: 2rem;
     }
+/* Numbering Styles */
+.text {
+  counter-reset: section;
+}
 
+.text h2 {
+  counter-reset: subsection;
+  color: var(--accent-color);
+}
+
+.text h2::before {
+  content: counter(section) ". ";
+  counter-increment: section;
+  color: var(--accent-color);
+}
+
+.text h3::before {
+  content: counter(section) "." counter(subsection) " ";
+  counter-increment: subsection;
+  color: var(--accent-color);
+}
+
+/* TOC Numbering */
+.toc ol {
+  counter-reset: toc-section;
+  list-style: none;
+  padding-left: 0;
+}
+
+.toc li::before {
+  content: counter(toc-section) ". ";
+  counter-increment: toc-section;
+  color: var(--accent-color);
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+/* Existing Styles Preserved */
+.heading-container h1 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+}
+.disclaimer {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+}
     @media (max-width: 768px) {
       /* Previous mobile styles */
       .toggle-switch {
@@ -670,13 +717,12 @@
   </div>
   <div class="content">
     <div class="text">
-      
       <!-- Section 1 -->
-      <h2 id="sec1">1. Introduction</h2>
+      <h2 id="m1">1. Introduction</h2>
       <p>This Merchant Terms of Use Agreement ("Agreement") is entered into between Aftahours Inc. ("Company," "we," "our") and the merchant partner ("Merchant," "you") and governs the use of our platform for facilitating food orders and related services. By accessing or using our services as a Merchant, you agree to comply with and be bound by the terms and conditions set forth in this Agreement. This Agreement is designed to protect both Aftahours Inc. and its Merchant partners and to ensure smooth, compliant, and high-quality operations.</p>
 
       <!-- Section 2 -->
-      <h2 id="sec2">2. Definitions</h2>
+      <h2 id="m2">2. Definitions</h2>
       <ul>
         <li><strong>Services:</strong> All functions, tools, and platforms provided by Aftahours Inc. to facilitate orders, payments, and communications between the Company and Merchant.</li>
         <li><strong>Merchant:</strong> Any restaurant, food service provider, or other entity registered with Aftahours Inc. to offer food products through our platform.</li>
@@ -686,7 +732,7 @@
       </ul>
 
       <!-- Section 3 -->
-      <h2 id="sec3">3. Merchant Responsibilities</h2>
+      <h2 id="m3">3. Merchant Responsibilities</h2>
       
       <h3>3.1 State Sales Tax Filing</h3>
       <ul>
@@ -711,7 +757,7 @@
       </ul>
 
       <!-- Section 4 -->
-      <h2 id="sec4">4. Additional Critical Clauses</h2>
+      <h2 id="m4">4. Additional Critical Clauses</h2>
       
       <h3>4.1 Dispute Resolution</h3>
       <ul>
@@ -743,7 +789,7 @@
       </ul>
 
       <!-- Section 5 -->
-      <h2 id="sec5">5. Overall Structure and Legal Robustness</h2>
+      <h2 id="m5">5. Overall Structure and Legal Robustness</h2>
       
       <h3>5.1 Clear Headings and Sections</h3>
       <p>This Agreement is organized into clear, numbered sections and subsections for ease of reference. Each section addresses a specific aspect of the Merchant relationship and operational requirements.</p>
@@ -764,7 +810,7 @@
       </ul>
 
       <!-- Section 6 -->
-      <h2 id="sec6">6. Miscellaneous</h2>
+      <h2 id="m6">6. Miscellaneous</h2>
       
       <h3>6.1 Entire Agreement</h3>
       <p>This Agreement, including all schedules and attachments referenced herein, constitutes the entire agreement between the parties regarding the subject matter herein and supersedes all prior or contemporaneous understandings or agreements, whether written or oral.</p>
@@ -777,7 +823,6 @@
 
       <h3>6.4 Contact Information</h3>
       <address>
-        For any questions, concerns, or disputes regarding this Agreement, please contact:<br><br>
         Aftahours Inc.<br>
         173 Weeden Street, Pawtucket, Rhode Island, 02860<br>
         Email: <a href="mailto:contact@aftahrs.com">contact@aftahrs.com</a><br>
@@ -795,12 +840,12 @@
     <aside class="toc">
       <h2>Table of Contents</h2>
       <ol>
-        <li><a href="#sec1">1. Introduction</a></li>
-        <li><a href="#sec2">2. Definitions</a></li>
-        <li><a href="#sec3">3. Merchant Responsibilities</a></li>
-        <li><a href="#sec4">4. Additional Critical Clauses</a></li>
-        <li><a href="#sec5">5. Overall Structure</a></li>
-        <li><a href="#sec6">6. Miscellaneous</a></li>
+        <li><a href="#m1">1. Introduction</a></li>
+        <li><a href="#m2">2. Definitions</a></li>
+        <li><a href="#m3">3. Merchant Responsibilities</a></li>
+        <li><a href="#m4">4. Additional Critical Clauses</a></li>
+        <li><a href="#m5">5. Overall Structure</a></li>
+        <li><a href="#m6">6. Miscellaneous</a></li>
       </ol>
     </aside>
   </div>
